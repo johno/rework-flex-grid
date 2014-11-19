@@ -1,0 +1,33 @@
+{
+  "name": "rework-flex",
+  "version": "0.0.1",
+  "description": "Rework CSS plugin for legacy, and future-proofed, flex support.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnotander/rework-flex.git"
+  },
+  "keywords": [
+    "rework",
+    "css",
+    "flex",
+    "flexbox",
+    "rework-plugin"
+  ],
+  "author": "John Otander",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnotander/rework-flex/issues"
+  },
+  "homepage": "https://github.com/johnotander/rework-flex",
+  "dependencies": {
+    "rework": "^1.0.1",
+    "rework-walk": "^1.0.0"
+  }
+}
