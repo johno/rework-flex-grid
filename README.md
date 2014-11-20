@@ -2,7 +2,7 @@
 
 __Currently under development.__
 
-Rework CSS plugin for legacy, and future-proofed, flex support.
+Rework CSS plugin for generating custom flex grids.
 
 ## Installation
 
@@ -18,8 +18,25 @@ var fs     = require('fs'),
     flex   = require('rework-flex');
 
 var css = fs.readFileSync('css/my-file.css', 'utf8').toString();
-var out = rework(css).use(flex({})).toString();
+var out = rework(css).use(flex({
+            numColumns: 12,
+            units: 'rem',
+            classNaming: {
+              gridClass: 'g',
+              rowClass: 'r',
+              colClass: 'c'
+            },
+            mediaQueries: {
+              xs: '',
+              sm: '',
+              md: '',
+              lg: '',
+              xl: ''
+            }
+          })).toString();
 ```
+
+_Note:_ This plugin produces CSS that should be [prefixed](https://github.com/postcss/autoprefixer).
 
 ## License
 
