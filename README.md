@@ -2,6 +2,8 @@
 
 __Currently under development.__
 
+[![Build Status](https://travis-ci.org/johnotander/rework-flex.svg?branch=master)](https://travis-ci.org/johnotander/rework-flex)
+
 Rework CSS plugin for generating custom flex grids.
 
 ## Installation

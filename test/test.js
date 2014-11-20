@@ -8,7 +8,7 @@ function fixture(name) {
 }
 
 describe('rework-flex', function() {
-  it('creates the default grid correctly', function() {
+  it('should create the default grid correctly', function() {
     var output = rework(fixture('source.css')).use(flexGrid()).toString().trim();
     var expected = fixture('default.css');
 
