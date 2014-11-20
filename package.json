@@ -1,7 +1,7 @@
 {
-  "name": "rework-flex",
+  "name": "rework-flex-grid",
   "version": "0.0.1",
-  "description": "Rework CSS plugin for legacy, and future-proofed, flex support.",
+  "description": "Rework CSS plugin for generating custom flex grids.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,21 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/johnotander/rework-flex.git"
+    "url": "https://github.com/johnotander/rework-flex-grid.git"
   },
   "keywords": [
     "rework",
     "css",
     "flex",
     "flexbox",
+    "grid",
     "rework-plugin"
   ],
   "author": "John Otander",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/johnotander/rework-flex/issues"
+    "url": "https://github.com/johnotander/rework-flex-grid/issues"
   },
-  "homepage": "https://github.com/johnotander/rework-flex",
+  "homepage": "https://github.com/johnotander/rework-flex-grid",
   "dependencies": {
     "rework": "^1.0.1",
     "rework-walk": "^1.0.0"

@@ -1,4 +1,4 @@
-# Rework Flex
+# Rework Flex Grid
 
 __Currently under development.__
 
@@ -15,27 +15,29 @@ npm install --save rework-flex
 ## Usage
 
 ```javascript
-var fs     = require('fs'),
-    rework = require('rework'),
-    flex   = require('rework-flex');
+var fs       = require('fs'),
+    rework   = require('rework'),
+    flexGrid = require('rework-flex0grid');
+
+var flexGridOptions = {
+  numColumns: 12,
+  units: 'rem',
+  classNaming: {
+    gridClass: 'g',
+    rowClass: 'r',
+    colClass: 'c'
+  },
+  mediaQueries: {
+    xs: '',
+    sm: '',
+    md: '',
+    lg: '',
+    xl: ''
+  }
+};
 
 var css = fs.readFileSync('css/my-file.css', 'utf8').toString();
-var out = rework(css).use(flex({
-            numColumns: 12,
-            units: 'rem',
-            classNaming: {
-              gridClass: 'g',
-              rowClass: 'r',
-              colClass: 'c'
-            },
-            mediaQueries: {
-              xs: '',
-              sm: '',
-              md: '',
-              lg: '',
-              xl: ''
-            }
-          })).toString();
+var out = rework(css).use(flexGrid(flexGridOptions)).toString();
 ```
 
 _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/postcss/autoprefixer).
