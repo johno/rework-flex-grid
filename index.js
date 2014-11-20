@@ -1,5 +1,8 @@
 'use strict';
 
+var walk = require('rework-walk');
+var getPrefixedSelector = require('./lib/utils/get-prefixed-selector.js');
+
 var FLEX_GRID_DEFAULT_CLASS_NAMES = {
   gridClass: 'g',
   rowClass: 'r',
@@ -50,10 +53,20 @@ var FLEX_GRID_DEFAULT_ROW_DECLARATIONS = [{
   type: 'declaration',
   property: 'flex-wrap',
   value: 'wrap'
-}]
+}];
+
+var FLEX_GRID_DEFAULT_GRID_DECLARATIONS = [{
+  type: 'declaration',
+  property: 'padding-left',
+  value: '1rem'
+}, {
+  type: 'declaration',
+  property: 'padding-right',
+  value: '1rem'
+}];
 
 module.exports = function flex() {
-  return function flex(options) {
+  return function flex(css, options) {
     var classNames = options.classNames || FLEX_GRID_DEFAULT_CLASS_NAMES;
   };
 };
