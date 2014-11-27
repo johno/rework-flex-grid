@@ -1,6 +1,8 @@
 'use strict';
 
 var walk = require('rework-walk');
+var toPercentage = require('to-percentage');
+
 var getPrefixedSelector = require('./lib/utils/get-prefixed-selector.js');
 
 var FLEX_GRID_DEFAULT_CLASS_NAMES = {
