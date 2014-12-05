@@ -17,7 +17,7 @@ npm install --save rework-flex
 ```javascript
 var fs       = require('fs'),
     rework   = require('rework'),
-    flexGrid = require('rework-flex0grid');
+    flexGrid = require('rework-flex-grid');
 
 var flexGridOptions = {
   numColumns: 12,

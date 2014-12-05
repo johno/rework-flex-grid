@@ -12,6 +12,8 @@ describe('rework-flex', function() {
     var output = rework(fixture('source.css')).use(flexGrid()).toString().trim();
     var expected = fixture('default.css');
 
+    fs.writeFileSync('test/fixtures/default.output.css', output);
+
     assert.equal(output, output); // expected);
   });
 });
