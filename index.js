@@ -32,6 +32,42 @@ module.exports = function flex() {
       declarations: rowDeclarations()
     });
 
-    console.log(css);
+    var colSelectors = []
+    for(var i = 1; i <= options.numColumns; i++) {
+      colSelectors.push(getColSelector(i, options.numColumns));
+      css.rules = css.rules.concat(createColRule(i, options.numColumns));
+    }
+
+    css.rules = css.rules.concat({
+      type: 'rule',
+      selectors: [colSelectors],
+      declarations: rowDeclarations()
+    });
   };
 };
+
+function createColRule(currCol, numCols) {
+  var colRule = {
+    type: 'rule',
+    selectors: [getColSelector(currCol, numCols)],
+    declarations: [{
+      type: 'declaration',
+      property: 'max-width',
+      value: toPercentage(currCol/numCols, 10)
+    }, {
+      type: 'declaration',
+      property: 'flex-basis',
+      value: toPercentage(currCol/numCols, 10)
+    }]
+  };
+
+  return colRule;
+}
+
+function getColSelector(currCol, numCols) {
+  if (currCol == numCols) {
+    return '.g-r-c-' + currCol;
+  } else {
+    return '.g-r-c-' + currCol + '-' + numCols;
+  }
+}
