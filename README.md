@@ -21,18 +21,15 @@ var fs       = require('fs'),
 
 var flexGridOptions = {
   numColumns: 12,
-  units: 'rem',
-  classNaming: {
-    gridClass: 'g',
-    rowClass: 'r',
-    colClass: 'c'
+  classNames: {
+    grid: 'g',
+    row: 'r',
+    col: 'c'
   },
   mediaQueries: {
-    xs: '',
-    sm: '',
-    md: '',
-    lg: '',
-    xl: ''
+    sm: '32rem',
+    md: '48rem',
+    lg: '64rem'
   }
 };
 
