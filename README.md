@@ -1,10 +1,50 @@
 # Rework Flex Grid
 
-__Currently under development.__
+__Currently under development (it's nearing completion).__
 
 [![Build Status](https://travis-ci.org/johnotander/rework-flex-grid.svg?branch=master)](https://travis-ci.org/johnotander/rework-flex-grid)
 
-Rework CSS plugin for generating custom flex grids.
+Rework CSS plugin for generating custom, lightweight [flex](http://caniuse.com/#search=flex) grids.
+
+### Why?
+
+Every project is different.
+
+You should be able to create a grid on the fly, that's catered to your project. This helps to avoid
+unnecessary bloat in your CSS. This grid generator uses [flex](http://caniuse.com/#search=flex) to
+dramatically reduce CSS declarations in the grid system.
+
+#### Mobile-first
+
+Rework Flex Grid creates a grid system that is 100% mobile-first. This ensures that mobile browsers
+aren't forced to parse media queries because they're not applicable. Less parsing means faster rendering
+which means faster load-to-content times which means happier users. Yay.
+
+#### Customizable
+
+You come up with your own naming scheme for classes. You set the breakpoints. You decide if you want column
+offsets. It's all in the configuration.
+
+#### Low Specificity
+
+All grid classes have a specificity value of 10. They consist of one class, and exactly one class,
+resulting in CSS similar to:
+
+```css
+.gridClass {
+  /* ... */
+}
+
+.gridClass-rowClass {
+  /* ... */
+}
+
+.gridClass-rowClass-columnClass {
+  /* ... */
+}
+```
+
+This ensures that the grid won't stomp on your styles, and makes it easy for you to override defaults.
 
 ## Installation
 
@@ -38,6 +78,13 @@ var out = rework(css).use(flexGrid(flexGridOptions)).toString();
 ```
 
 _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/postcss/autoprefixer).
+
+## TODO:
+
+- [ ] Create a mini app to allow people to generate grids in their browser.
+- [ ] Offset configuration.
+- [ ] Media queries.
+- [ ] Media query configuration.
 
 ## License
 
