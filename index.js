@@ -16,7 +16,7 @@ var gridUnits = require('./lib/defaults/grid-units');
 
 var getPrefixedSelector = require('./lib/utils/get-prefixed-selector');
 
-var classNames;
+var classNames, mediaQueries;
 
 module.exports = function flex() {
   return function flex(css, options) {
@@ -30,6 +30,12 @@ module.exports = function flex() {
       row: 'r',
       col: 'c'
     }, options.classNames || {});
+
+    mediaQueries = extendOptions({
+      sm: '32rem',
+      md: '48rem',
+      lg: '64rem'
+    }, options.mediaQueries || {});
 
     css.rules = css.rules.concat({
       type: 'rule',
@@ -53,6 +59,25 @@ module.exports = function flex() {
       type: 'rule',
       selectors: [colSelectors],
       declarations: rowDeclarations()
+    });
+
+    Object.keys(mediaQueries).forEach(function(key) {
+      var mediaQueryRules = [];
+
+      for(var i = 1; i <= options.numColumns; i++) {
+        mediaQueryRules = mediaQueryRules.concat(
+                            createColRule(
+                              i,
+                              options.numColumns,
+                              classNames,
+                              '-' + key));
+      }
+
+      css.rules.push({
+        type: 'media',
+        media: 'screen and (min-width: ' + mediaQueries[key] + ')',
+        rules: mediaQueryRules
+      });
     });
   };
 };
