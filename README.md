@@ -10,14 +10,15 @@ Rework CSS plugin for generating custom, lightweight [flex](http://caniuse.com/#
 
 Every project is different.
 
-You should be able to create a grid on the fly, that's catered to your project. This helps to avoid
+You should be able to create a grid on the fly that's catered to your project. If you only want 8
+columns you can create a grid with exactly 8 columns rather than being stuck with 12. This helps to avoid
 unnecessary bloat in your CSS. This grid generator uses [flex](http://caniuse.com/#search=flex) to
 dramatically reduce CSS declarations in the grid system.
 
 #### Mobile-first
 
 Rework Flex Grid creates a grid system that is 100% mobile-first. This ensures that mobile browsers
-aren't forced to parse media queries because they're not applicable. Less parsing means faster rendering
+aren't forced to parse media queries when they're not applicable. Less parsing means faster rendering
 which means faster load-to-content times which means happier users. Yay.
 
 #### Customizable
@@ -41,6 +42,12 @@ resulting in CSS similar to:
 
 .gridClass-rowClass-columnClass {
   /* ... */
+}
+
+@media screen and (min-width: 32rem) {
+  .gridClass-rowClass-columnClass--sm {
+    /* ... */
+  }
 }
 ```
 
