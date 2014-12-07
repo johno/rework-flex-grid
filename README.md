@@ -93,6 +93,11 @@ _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/po
 - [ ] Media queries.
 - [ ] Media query configuration.
 
+## Acknowledgements
+
+Inspired by [Yahoo!'s Rework Pure Grids](https://github.com/yahoo/rework-pure-grids).
+Adapted some flex grid code from [Kristofer Joseph](https://github.com/kristoferjoseph/flexboxgrid).
+
 ## License
 
 MIT
