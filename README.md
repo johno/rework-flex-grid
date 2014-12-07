@@ -56,7 +56,7 @@ This ensures that the grid won't stomp on your styles, and makes it easy for you
 ## Installation
 
 ```
-npm install --save rework-flex
+npm install --save rework-flex-grid
 ```
 
 ## Usage
@@ -90,8 +90,8 @@ _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/po
 
 - [ ] Create a mini app to allow people to generate grids in their browser.
 - [ ] Offset configuration.
-- [ ] Media queries.
-- [ ] Media query configuration.
+- [X] Media queries.
+- [X] Media query configuration.
 
 ## Acknowledgements
 
