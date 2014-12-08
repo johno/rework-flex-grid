@@ -22,7 +22,7 @@ module.exports = function flex(options) {
     options = extendOptions({
       numColumns: 12,
       units: 'rem'
-    }, options);
+    }, options || {});
 
     classNames = extendOptions({
       grid: 'g',
