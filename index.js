@@ -1,6 +1,5 @@
 'use strict';
 
-var walk = require('rework-walk');
 var toPercentage = require('to-percentage');
 var extendOptions = require('extend-options');
 

@@ -30,7 +30,6 @@
   "dependencies": {
     "extend-options": "0.0.1",
     "rework": "^1.0.1",
-    "rework-walk": "^1.0.0",
     "to-percentage": "0.0.1"
   },
   "devDependencies": {
