@@ -1,6 +1,6 @@
 {
   "name": "rework-flex-grid",
-  "version": "0.0.1beta2",
+  "version": "0.0.1beta5",
   "description": "Rework CSS plugin for generating custom flex grids.",
   "main": "index.js",
   "directories": {

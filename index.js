@@ -17,8 +17,8 @@ var getPrefixedSelector = require('./lib/utils/get-prefixed-selector');
 
 var classNames, mediaQueries;
 
-module.exports = function flex() {
-  return function flex(css, options) {
+module.exports = function flex(options) {
+  return function flex(css) {
     options = extendOptions({
       numColumns: 12,
       units: 'rem'
@@ -44,7 +44,7 @@ module.exports = function flex() {
 
     css.rules = css.rules.concat({
       type: 'rule',
-      selectors: [getPrefixedSelector('g', 'r')],
+      selectors: [getPrefixedSelector(classNames.grid, classNames.row)],
       declarations: rowDeclarations()
     });
 
