@@ -1,9 +1,46 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var rework = require('rework');
+var updateGrid = require('./update-grid');
 
-},{"rework":9}],2:[function(require,module,exports){
+(function() {
+  window.updateGrid = updateGrid;
+}());
 
-},{}],3:[function(require,module,exports){
+
+},{"./update-grid":2}],2:[function(require,module,exports){
+var rework = require('rework')
+var reworkFlexGrid = require('rework-flex-grid');
+var isBlank = require('is-blank');
+
+module.exports = function updateGrid() {
+  var numColumnsElem = document.getElementById('numColumns');
+  var gridClassElem = document.getElementById('gridClassName');
+  var rowClassElem = document.getElementById('rowClassName');
+  var colClassElem = document.getElementById('colClassName');
+
+  var numColumns, gridClass, rowClass, colClass;
+
+  numColumns = isBlank(numColumnsElem.value) ? 12 : numColumnsElem.value;
+  gridClass = isBlank(gridClassElem.value) ? 'g' : gridClassElem.value;
+  rowClass = isBlank(rowClassElem.value) ? 'r' : rowClassElem.value;
+  colClass = isBlank(colClassElem.value) ? 'c' : colClassElem.value;
+
+  var gridCss = rework('').use(reworkFlexGrid({
+    numColumns: numColumns,
+    classNames: {
+      grid: gridClass,
+      row: rowClass,
+      col: colClass
+    }
+  })).toString().trim();
+
+  var cssCodeElem = document.getElementById('css-code');
+  cssCodeElem.appendChild(document.createTextNode(gridCss));
+  console.log('hi');
+};
+
+},{"is-blank":10,"rework":25,"rework-flex-grid":13}],3:[function(require,module,exports){
+
+},{}],4:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -1057,7 +1094,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":4,"ieee754":5,"is-array":6}],4:[function(require,module,exports){
+},{"base64-js":5,"ieee754":6,"is-array":7}],5:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1179,7 +1216,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1265,7 +1302,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 
 /**
  * isArray
@@ -1300,7 +1337,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1528,7 +1565,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":8}],8:[function(require,module,exports){
+},{"_process":9}],9:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1616,7 +1653,306 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+var isEmpty = require('is-empty');
+var isWhitespace = require('is-whitespace');
+
+module.exports = function isBlank(object) {
+  if(typeof object == 'string' && object.length) {
+    return isWhitespace(object);
+  } else {
+    return isEmpty(object);
+  }
+};
+
+},{"is-empty":11,"is-whitespace":12}],11:[function(require,module,exports){
+
+/**
+ * Expose `isEmpty`.
+ */
+
+module.exports = isEmpty;
+
+
+/**
+ * Has.
+ */
+
+var has = Object.prototype.hasOwnProperty;
+
+
+/**
+ * Test whether a value is "empty".
+ *
+ * @param {Mixed} val
+ * @return {Boolean}
+ */
+
+function isEmpty (val) {
+  if (null == val) return true;
+  if ('number' == typeof val) return 0 === val;
+  if (undefined !== val.length) return 0 === val.length;
+  for (var key in val) if (has.call(val, key)) return false;
+  return true;
+}
+},{}],12:[function(require,module,exports){
+/*!
+ * is-whitespace <https://github.com/jonschlinkert/is-whitespace>
+ *
+ * Copyright (c) 2014 Jon Schlinkert, contributors.
+ * Licensed under the MIT License
+ */
+
+'use strict';
+
+var regex = new RegExp('^[\\s\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF"]+$');
+
+module.exports = function isWhitespace(value) {
+  if (typeof value === 'string') {
+    return regex.test(value);
+  }
+  return false;
+};
+
+},{}],13:[function(require,module,exports){
+'use strict';
+
+var toPercentage = require('to-percentage');
+var extendOptions = require('extend-options');
+
+var getColSelector = require('./lib/get-col-selector');
+var createColRule = require('./lib/create-col-rule');
+
+var gridDeclarations = require('./lib/defaults/grid-declarations');
+var rowDeclarations = require('./lib/defaults/row-declarations');
+var colDeclarations = require('./lib/defaults/col-declarations');
+var mediaQueries = require('./lib/defaults/media-queries');
+var classNames = require('./lib/defaults/class-names');
+var gridUnits = require('./lib/defaults/grid-units');
+
+var getPrefixedSelector = require('./lib/utils/get-prefixed-selector');
+
+var classNames, mediaQueries;
+
+module.exports = function flex(options) {
+  return function flex(css) {
+    options = extendOptions({
+      numColumns: 12,
+      units: 'rem'
+    }, options);
+
+    classNames = extendOptions({
+      grid: 'g',
+      row: 'r',
+      col: 'c'
+    }, options.classNames || {});
+
+    mediaQueries = extendOptions({
+      sm: '32rem',
+      md: '48rem',
+      lg: '64rem'
+    }, options.mediaQueries || {});
+
+    css.rules = css.rules.concat({
+      type: 'rule',
+      selectors: ['.' + classNames.grid],
+      declarations: gridDeclarations()
+    });
+
+    css.rules = css.rules.concat({
+      type: 'rule',
+      selectors: [getPrefixedSelector('g', 'r')],
+      declarations: rowDeclarations()
+    });
+
+    var colSelectors = []
+    for(var i = 1; i <= options.numColumns; i++) {
+      colSelectors.push(getColSelector(i, options.numColumns, classNames));
+      css.rules = css.rules.concat(createColRule(i, options.numColumns, classNames));
+    }
+
+    css.rules = css.rules.concat({
+      type: 'rule',
+      selectors: [colSelectors],
+      declarations: rowDeclarations()
+    });
+
+    Object.keys(mediaQueries).forEach(function(key) {
+      var mediaQueryRules = [];
+
+      for(var i = 1; i <= options.numColumns; i++) {
+        mediaQueryRules = mediaQueryRules.concat(
+                            createColRule(
+                              i,
+                              options.numColumns,
+                              classNames,
+                              '-' + key));
+      }
+
+      css.rules.push({
+        type: 'media',
+        media: 'screen and (min-width: ' + mediaQueries[key] + ')',
+        rules: mediaQueryRules
+      });
+    });
+  };
+};
+
+},{"./lib/create-col-rule":14,"./lib/defaults/class-names":15,"./lib/defaults/col-declarations":16,"./lib/defaults/grid-declarations":17,"./lib/defaults/grid-units":18,"./lib/defaults/media-queries":19,"./lib/defaults/row-declarations":20,"./lib/get-col-selector":21,"./lib/utils/get-prefixed-selector":22,"extend-options":23,"to-percentage":24}],14:[function(require,module,exports){
+var getColSelector = require('./get-col-selector');
+var toPercentage = require('to-percentage');
+
+module.exports = function createColRule(currCol, numCols, classNames, modifier) {
+  var colRule = {
+    type: 'rule',
+    selectors: [getColSelector(currCol, numCols, classNames, modifier)],
+    declarations: [{
+      type: 'declaration',
+      property: 'max-width',
+      value: toPercentage(currCol/numCols, 10)
+    }, {
+      type: 'declaration',
+      property: 'flex-basis',
+      value: toPercentage(currCol/numCols, 10)
+    }]
+  };
+
+  return colRule;
+};
+
+},{"./get-col-selector":21,"to-percentage":24}],15:[function(require,module,exports){
+module.exports = function classNames() {
+  return {
+    gridClass: 'g',
+    rowClass: 'r',
+    colClass: 'c'
+  };
+}
+
+},{}],16:[function(require,module,exports){
+module.exports = function colDeclarations() {
+  return [{
+    type: 'declaration',
+    property: 'flex',
+    value: '1'
+  }, {
+    type: 'declaration',
+    property: 'flex-direction',
+    value: 'column'
+  }, {
+    type: 'declaration',
+    property: 'box-sizing',
+    value: 'border-box'
+  }];
+}
+
+},{}],17:[function(require,module,exports){
+module.exports = function gridDeclarations() {
+  return [{
+    type: 'declaration',
+    property: 'padding-left',
+    value: '1rem'
+  }, {
+    type: 'declaration',
+    property: 'padding-right',
+    value: '1rem'
+  }];
+}
+
+},{}],18:[function(require,module,exports){
+module.exports = function gridUnits() {
+  return 'rem';
+}
+
+},{}],19:[function(require,module,exports){
+module.exports = function mediaQueries() {
+  return {
+    xs: '',
+    sm: '',
+    md: '',
+    lg: '',
+    xl: ''
+  };
+}
+
+},{}],20:[function(require,module,exports){
+module.exports = function rowDeclarations() {
+  return [{
+    type: 'declaration',
+    property: 'box-sizing',
+    value: 'border-box'
+  }, {
+    type: 'declaration',
+    property: 'display',
+    value: 'flex'
+  }, {
+    type: 'declaration',
+    property: 'flex-direction',
+    value: 'row'
+  }, {
+    type: 'declaration',
+    property: 'flex-wrap',
+    value: 'wrap'
+  }, {
+    type: 'declaration',
+    property: 'max-width',
+    value: '100%'
+  }];
+}
+
+},{}],21:[function(require,module,exports){
+var getPrefixedSelector = require('./utils/get-prefixed-selector')
+
+module.exports = function getColSelector(currCol, numCols, classNames, modifier) {
+  var classModifiers;
+
+  if (currCol == numCols) {
+    if (modifier) {
+      classModifiers = currCol + '-' + modifier;
+    } else {
+      classModifiers = currCol;
+    }
+  } else {
+    if (modifier) {
+      classModifiers = currCol + '-' + numCols + '-' + modifier;
+    } else {
+      classModifiers = currCol + '-' + numCols;
+    }
+  }
+
+  return getPrefixedSelector(
+    classNames.grid,
+    classNames.row,
+    classNames.col,
+    classModifiers);
+};
+
+},{"./utils/get-prefixed-selector":22}],22:[function(require,module,exports){
+module.exports = function getPrefixedSelector() {
+  var args = [].slice.call(arguments);
+  return '.' + args.join('-');
+};
+
+},{}],23:[function(require,module,exports){
+module.exports = function extendOptions(defaultOptions, options) {
+  Object.keys(defaultOptions).forEach(function(key) {
+    if(!(key in options)) {
+      options[key] = defaultOptions[key];
+    }
+  });
+
+  return options;
+}
+
+},{}],24:[function(require,module,exports){
+'use strict';
+
+module.exports = function toPercentage(value, numDecimals) {
+  value *= 100;
+  return value.toFixed(value % 1 === 0 ? 0 : numDecimals) + '%';
+}
+
+},{}],25:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -1700,7 +2036,7 @@ function sourcemapToComment(map) {
   return '/*# sourceMappingURL=data:application/json;base64,' + content + ' */';
 }
 
-},{"convert-source-map":10,"css":11}],10:[function(require,module,exports){
+},{"convert-source-map":26,"css":27}],26:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var fs = require('fs');
@@ -1843,11 +2179,11 @@ exports.__defineGetter__('mapFileCommentRegex', function () {
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":3,"fs":2,"path":7}],11:[function(require,module,exports){
+},{"buffer":4,"fs":3,"path":8}],27:[function(require,module,exports){
 exports.parse = require('./lib/parse');
 exports.stringify = require('./lib/stringify');
 
-},{"./lib/parse":12,"./lib/stringify":16}],12:[function(require,module,exports){
+},{"./lib/parse":28,"./lib/stringify":32}],28:[function(require,module,exports){
 // http://www.w3.org/TR/CSS21/grammar.html
 // https://github.com/visionmedia/css-parse/pull/49#issuecomment-30088027
 var commentre = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g
@@ -2445,7 +2781,7 @@ function addParent(obj, parent) {
   return obj;
 }
 
-},{}],13:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 
 /**
  * Expose `Compiler`.
@@ -2497,7 +2833,7 @@ Compiler.prototype.mapVisit = function(nodes, delim){
   return buf;
 };
 
-},{}],14:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -2698,7 +3034,7 @@ Compiler.prototype.declaration = function(node){
 };
 
 
-},{"./compiler":13,"inherits":18}],15:[function(require,module,exports){
+},{"./compiler":29,"inherits":34}],31:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -2954,7 +3290,7 @@ Compiler.prototype.indent = function(level) {
   return Array(this.level).join(this.indentation || '  ');
 };
 
-},{"./compiler":13,"inherits":18}],16:[function(require,module,exports){
+},{"./compiler":29,"inherits":34}],32:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -3003,7 +3339,7 @@ module.exports = function(node, options){
   return code;
 };
 
-},{"./compress":14,"./identity":15,"./source-map-support":17}],17:[function(require,module,exports){
+},{"./compress":30,"./identity":31,"./source-map-support":33}],33:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -3131,7 +3467,7 @@ exports.comment = function(node) {
     return this._comment(node);
 };
 
-},{"fs":2,"path":7,"source-map":22,"source-map-resolve":21,"urix":32}],18:[function(require,module,exports){
+},{"fs":3,"path":8,"source-map":38,"source-map-resolve":37,"urix":48}],34:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -3156,7 +3492,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],19:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -3205,7 +3541,7 @@ void (function(root, factory) {
 
 }));
 
-},{}],20:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -3264,7 +3600,7 @@ void (function(root, factory) {
 
 }));
 
-},{}],21:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -3489,7 +3825,7 @@ void (function(root, factory) {
 
 }));
 
-},{"resolve-url":19,"source-map-url":20}],22:[function(require,module,exports){
+},{"resolve-url":35,"source-map-url":36}],38:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -3499,7 +3835,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":27,"./source-map/source-map-generator":28,"./source-map/source-node":29}],23:[function(require,module,exports){
+},{"./source-map/source-map-consumer":43,"./source-map/source-map-generator":44,"./source-map/source-node":45}],39:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3598,7 +3934,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":30,"amdefine":31}],24:[function(require,module,exports){
+},{"./util":46,"amdefine":47}],40:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3742,7 +4078,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":25,"amdefine":31}],25:[function(require,module,exports){
+},{"./base64":41,"amdefine":47}],41:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3786,7 +4122,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":31}],26:[function(require,module,exports){
+},{"amdefine":47}],42:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3869,7 +4205,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":31}],27:[function(require,module,exports){
+},{"amdefine":47}],43:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -4354,7 +4690,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":23,"./base64-vlq":24,"./binary-search":26,"./util":30,"amdefine":31}],28:[function(require,module,exports){
+},{"./array-set":39,"./base64-vlq":40,"./binary-search":42,"./util":46,"amdefine":47}],44:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -4757,7 +5093,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":23,"./base64-vlq":24,"./util":30,"amdefine":31}],29:[function(require,module,exports){
+},{"./array-set":39,"./base64-vlq":40,"./util":46,"amdefine":47}],45:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -5167,7 +5503,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":28,"./util":30,"amdefine":31}],30:[function(require,module,exports){
+},{"./source-map-generator":44,"./util":46,"amdefine":47}],46:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -5488,7 +5824,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":31}],31:[function(require,module,exports){
+},{"amdefine":47}],47:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 0.1.0 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
@@ -5791,7 +6127,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/rework/node_modules/css/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":8,"path":7}],32:[function(require,module,exports){
+},{"_process":9,"path":8}],48:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -5810,4 +6146,4 @@ function urix(aPath) {
 
 module.exports = urix
 
-},{"path":7}]},{},[1]);
+},{"path":8}]},{},[1]);

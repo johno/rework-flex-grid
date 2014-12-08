@@ -246,7 +246,15 @@ pre {
 }
 
 .measure {
-  max-width: 64rem;
+  max-width: 48rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+h1 {
+  padding: 3rem 0;
+}
+
+.hidden {
+  display: none;
 }

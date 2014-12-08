@@ -15,10 +15,29 @@
 
 <div class="measure" role="main">
   <h1>Rework Flex Grid</h1>
-  <label for="numColumns">Number of columns</label>
-  <input type="number" id="numColumns">
+  <div role="form">
+    <label for="numColumns">Number of columns</label>
+    <input type="text" id="numColumns" placeholder="12" onchange="updateGrid();">
+
+    <label for="gridClassName">Grid class name</label>
+    <input type="text" id="gridClassName" placeholder="g" onchange="updateGrid();">
+
+    <label for="rowClassName">Row class name</label>
+    <input type="text" id="rowClassName" placeholder="r" onchange="updateGrid();">
+
+    <label for="colClassName">Column class name</label>
+    <input type="text" id="colClassName" placeholder="c" onchange="updateGrid();">
+  </div>
+  <div class="grid-tabs">
+    <div id="css">
+<pre id="css-code"></pre>
+    </div>
+  </div>
 </div>
 
 <script src="js/j.js"></script>
+<script>
+  // updateGrid = require('./js/src/update-grid');
+</script>
 </body>
 </html>

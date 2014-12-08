@@ -37,6 +37,7 @@
     "gulp-rework": "^1.0.2",
     "gulp-size": "^1.1.0",
     "gulp-uncss": "^0.5.1",
+    "is-blank": "0.0.1",
     "rework": "^1.0.1",
     "rework-custom-media": "^0.2.0",
     "rework-npm": "^1.0.0",
@@ -44,5 +45,8 @@
     "vinyl-source-stream": "^1.0.0",
     "vinyl-transform": "^1.0.0",
     "watchify": "^2.1.1"
+  },
+  "dependencies": {
+    "rework-flex-grid": "0.0.1-beta4"
   }
 }

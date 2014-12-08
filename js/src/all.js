@@ -1,1 +1,6 @@
-var rework = require('rework');
+var updateGrid = require('./update-grid');
+
+(function() {
+  window.updateGrid = updateGrid;
+}());
+
