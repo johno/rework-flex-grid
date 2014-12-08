@@ -6,10 +6,23 @@ var updateGrid = require('./update-grid');
 }());
 
 
-},{"./update-grid":2}],2:[function(require,module,exports){
+},{"./update-grid":3}],2:[function(require,module,exports){
+module.exports = function setCss(cssText) {
+  var cssCodeElem = document.getElementById('css-code');
+
+  if (cssCodeElem.firstChild) {
+    cssCodeElem.removeChild(cssCodeElem.firstChild);
+  }
+
+  cssCodeElem.appendChild(document.createTextNode(cssText));
+};
+
+},{}],3:[function(require,module,exports){
 var rework = require('rework')
 var reworkFlexGrid = require('rework-flex-grid');
 var isBlank = require('is-blank');
+
+var setCss = require('./set-css');
 
 module.exports = function updateGrid() {
   var numColumnsElem = document.getElementById('numColumns');
@@ -33,14 +46,12 @@ module.exports = function updateGrid() {
     }
   })).toString().trim();
 
-  var cssCodeElem = document.getElementById('css-code');
-  cssCodeElem.appendChild(document.createTextNode(gridCss));
-  console.log('hi');
+  setCss(gridCss);
 };
 
-},{"is-blank":10,"rework":25,"rework-flex-grid":13}],3:[function(require,module,exports){
+},{"./set-css":2,"is-blank":11,"rework":26,"rework-flex-grid":14}],4:[function(require,module,exports){
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -1094,7 +1105,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":5,"ieee754":6,"is-array":7}],5:[function(require,module,exports){
+},{"base64-js":6,"ieee754":7,"is-array":8}],6:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1216,7 +1227,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1302,7 +1313,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 /**
  * isArray
@@ -1337,7 +1348,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1565,7 +1576,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":9}],9:[function(require,module,exports){
+},{"_process":10}],10:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1653,7 +1664,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var isEmpty = require('is-empty');
 var isWhitespace = require('is-whitespace');
 
@@ -1665,7 +1676,7 @@ module.exports = function isBlank(object) {
   }
 };
 
-},{"is-empty":11,"is-whitespace":12}],11:[function(require,module,exports){
+},{"is-empty":12,"is-whitespace":13}],12:[function(require,module,exports){
 
 /**
  * Expose `isEmpty`.
@@ -1695,7 +1706,7 @@ function isEmpty (val) {
   for (var key in val) if (has.call(val, key)) return false;
   return true;
 }
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*!
  * is-whitespace <https://github.com/jonschlinkert/is-whitespace>
  *
@@ -1714,7 +1725,7 @@ module.exports = function isWhitespace(value) {
   return false;
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var toPercentage = require('to-percentage');
@@ -1761,7 +1772,7 @@ module.exports = function flex(options) {
 
     css.rules = css.rules.concat({
       type: 'rule',
-      selectors: [getPrefixedSelector('g', 'r')],
+      selectors: [getPrefixedSelector(classNames.grid, classNames.row)],
       declarations: rowDeclarations()
     });
 
@@ -1798,7 +1809,7 @@ module.exports = function flex(options) {
   };
 };
 
-},{"./lib/create-col-rule":14,"./lib/defaults/class-names":15,"./lib/defaults/col-declarations":16,"./lib/defaults/grid-declarations":17,"./lib/defaults/grid-units":18,"./lib/defaults/media-queries":19,"./lib/defaults/row-declarations":20,"./lib/get-col-selector":21,"./lib/utils/get-prefixed-selector":22,"extend-options":23,"to-percentage":24}],14:[function(require,module,exports){
+},{"./lib/create-col-rule":15,"./lib/defaults/class-names":16,"./lib/defaults/col-declarations":17,"./lib/defaults/grid-declarations":18,"./lib/defaults/grid-units":19,"./lib/defaults/media-queries":20,"./lib/defaults/row-declarations":21,"./lib/get-col-selector":22,"./lib/utils/get-prefixed-selector":23,"extend-options":24,"to-percentage":25}],15:[function(require,module,exports){
 var getColSelector = require('./get-col-selector');
 var toPercentage = require('to-percentage');
 
@@ -1820,7 +1831,7 @@ module.exports = function createColRule(currCol, numCols, classNames, modifier) 
   return colRule;
 };
 
-},{"./get-col-selector":21,"to-percentage":24}],15:[function(require,module,exports){
+},{"./get-col-selector":22,"to-percentage":25}],16:[function(require,module,exports){
 module.exports = function classNames() {
   return {
     gridClass: 'g',
@@ -1829,7 +1840,7 @@ module.exports = function classNames() {
   };
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports = function colDeclarations() {
   return [{
     type: 'declaration',
@@ -1846,7 +1857,7 @@ module.exports = function colDeclarations() {
   }];
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 module.exports = function gridDeclarations() {
   return [{
     type: 'declaration',
@@ -1859,12 +1870,12 @@ module.exports = function gridDeclarations() {
   }];
 }
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports = function gridUnits() {
   return 'rem';
 }
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 module.exports = function mediaQueries() {
   return {
     xs: '',
@@ -1875,7 +1886,7 @@ module.exports = function mediaQueries() {
   };
 }
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = function rowDeclarations() {
   return [{
     type: 'declaration',
@@ -1900,7 +1911,7 @@ module.exports = function rowDeclarations() {
   }];
 }
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var getPrefixedSelector = require('./utils/get-prefixed-selector')
 
 module.exports = function getColSelector(currCol, numCols, classNames, modifier) {
@@ -1927,13 +1938,13 @@ module.exports = function getColSelector(currCol, numCols, classNames, modifier)
     classModifiers);
 };
 
-},{"./utils/get-prefixed-selector":22}],22:[function(require,module,exports){
+},{"./utils/get-prefixed-selector":23}],23:[function(require,module,exports){
 module.exports = function getPrefixedSelector() {
   var args = [].slice.call(arguments);
   return '.' + args.join('-');
 };
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 module.exports = function extendOptions(defaultOptions, options) {
   Object.keys(defaultOptions).forEach(function(key) {
     if(!(key in options)) {
@@ -1944,7 +1955,7 @@ module.exports = function extendOptions(defaultOptions, options) {
   return options;
 }
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 module.exports = function toPercentage(value, numDecimals) {
@@ -1952,7 +1963,7 @@ module.exports = function toPercentage(value, numDecimals) {
   return value.toFixed(value % 1 === 0 ? 0 : numDecimals) + '%';
 }
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -2036,7 +2047,7 @@ function sourcemapToComment(map) {
   return '/*# sourceMappingURL=data:application/json;base64,' + content + ' */';
 }
 
-},{"convert-source-map":26,"css":27}],26:[function(require,module,exports){
+},{"convert-source-map":27,"css":28}],27:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var fs = require('fs');
@@ -2179,11 +2190,11 @@ exports.__defineGetter__('mapFileCommentRegex', function () {
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":4,"fs":3,"path":8}],27:[function(require,module,exports){
+},{"buffer":5,"fs":4,"path":9}],28:[function(require,module,exports){
 exports.parse = require('./lib/parse');
 exports.stringify = require('./lib/stringify');
 
-},{"./lib/parse":28,"./lib/stringify":32}],28:[function(require,module,exports){
+},{"./lib/parse":29,"./lib/stringify":33}],29:[function(require,module,exports){
 // http://www.w3.org/TR/CSS21/grammar.html
 // https://github.com/visionmedia/css-parse/pull/49#issuecomment-30088027
 var commentre = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g
@@ -2781,7 +2792,7 @@ function addParent(obj, parent) {
   return obj;
 }
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 
 /**
  * Expose `Compiler`.
@@ -2833,7 +2844,7 @@ Compiler.prototype.mapVisit = function(nodes, delim){
   return buf;
 };
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -3034,7 +3045,7 @@ Compiler.prototype.declaration = function(node){
 };
 
 
-},{"./compiler":29,"inherits":34}],31:[function(require,module,exports){
+},{"./compiler":30,"inherits":35}],32:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -3290,7 +3301,7 @@ Compiler.prototype.indent = function(level) {
   return Array(this.level).join(this.indentation || '  ');
 };
 
-},{"./compiler":29,"inherits":34}],32:[function(require,module,exports){
+},{"./compiler":30,"inherits":35}],33:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -3339,7 +3350,7 @@ module.exports = function(node, options){
   return code;
 };
 
-},{"./compress":30,"./identity":31,"./source-map-support":33}],33:[function(require,module,exports){
+},{"./compress":31,"./identity":32,"./source-map-support":34}],34:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -3467,7 +3478,7 @@ exports.comment = function(node) {
     return this._comment(node);
 };
 
-},{"fs":3,"path":8,"source-map":38,"source-map-resolve":37,"urix":48}],34:[function(require,module,exports){
+},{"fs":4,"path":9,"source-map":39,"source-map-resolve":38,"urix":49}],35:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -3492,7 +3503,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -3541,7 +3552,7 @@ void (function(root, factory) {
 
 }));
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -3600,7 +3611,7 @@ void (function(root, factory) {
 
 }));
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -3825,7 +3836,7 @@ void (function(root, factory) {
 
 }));
 
-},{"resolve-url":35,"source-map-url":36}],38:[function(require,module,exports){
+},{"resolve-url":36,"source-map-url":37}],39:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -3835,7 +3846,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":43,"./source-map/source-map-generator":44,"./source-map/source-node":45}],39:[function(require,module,exports){
+},{"./source-map/source-map-consumer":44,"./source-map/source-map-generator":45,"./source-map/source-node":46}],40:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3934,7 +3945,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":46,"amdefine":47}],40:[function(require,module,exports){
+},{"./util":47,"amdefine":48}],41:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -4078,7 +4089,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":41,"amdefine":47}],41:[function(require,module,exports){
+},{"./base64":42,"amdefine":48}],42:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -4122,7 +4133,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":47}],42:[function(require,module,exports){
+},{"amdefine":48}],43:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -4205,7 +4216,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":47}],43:[function(require,module,exports){
+},{"amdefine":48}],44:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -4690,7 +4701,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":39,"./base64-vlq":40,"./binary-search":42,"./util":46,"amdefine":47}],44:[function(require,module,exports){
+},{"./array-set":40,"./base64-vlq":41,"./binary-search":43,"./util":47,"amdefine":48}],45:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -5093,7 +5104,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":39,"./base64-vlq":40,"./util":46,"amdefine":47}],45:[function(require,module,exports){
+},{"./array-set":40,"./base64-vlq":41,"./util":47,"amdefine":48}],46:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -5503,7 +5514,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":44,"./util":46,"amdefine":47}],46:[function(require,module,exports){
+},{"./source-map-generator":45,"./util":47,"amdefine":48}],47:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -5824,7 +5835,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":47}],47:[function(require,module,exports){
+},{"amdefine":48}],48:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 0.1.0 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
@@ -6127,7 +6138,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/rework/node_modules/css/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":9,"path":8}],48:[function(require,module,exports){
+},{"_process":10,"path":9}],49:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -6146,4 +6157,4 @@ function urix(aPath) {
 
 module.exports = urix
 
-},{"path":8}]},{},[1]);
+},{"path":9}]},{},[1]);

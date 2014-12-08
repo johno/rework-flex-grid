@@ -2,6 +2,8 @@ var rework = require('rework')
 var reworkFlexGrid = require('rework-flex-grid');
 var isBlank = require('is-blank');
 
+var setCss = require('./set-css');
+
 module.exports = function updateGrid() {
   var numColumnsElem = document.getElementById('numColumns');
   var gridClassElem = document.getElementById('gridClassName');
@@ -24,7 +26,5 @@ module.exports = function updateGrid() {
     }
   })).toString().trim();
 
-  var cssCodeElem = document.getElementById('css-code');
-  cssCodeElem.appendChild(document.createTextNode(gridCss));
-  console.log('hi');
+  setCss(gridCss);
 };
