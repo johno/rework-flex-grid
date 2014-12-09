@@ -245,16 +245,39 @@ pre {
   overflow-x: scroll;
 }
 
+a,
+a:visited {
+  color: #3498db;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: #2980b9;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
 .measure {
   max-width: 48rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-h1 {
+.hero {
   padding: 3rem 0;
 }
 
 .hidden {
   display: none;
+}
+
+.grid-item {
+  background-color: #fafafa;
+  border: thin solid #fff;
+  color: #888;
+  font-size: .6rem;
+  padding: .5rem;
 }
