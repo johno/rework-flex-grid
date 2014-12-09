@@ -11,9 +11,9 @@
 <meta name="description" content="Dynamically generate and customize a lightweight flex grid system.">
 <link rel="stylesheet" href="css/c.css" type="text/css">
 </head>
-<body>
+<body class="page">
 
-<div class="measure" role="main">
+<div class="measure page-content" role="main">
   <div class="hero">
     <h1>
       Rework Flex Grid
@@ -39,14 +39,22 @@
     <input type="text" id="colClassName" placeholder="c" onchange="updateGrid();">
   </div>
 
-  <div class="grid-tabs">
-    <div id="grid-example">
-    </div>
-    <div id="css">
-<pre id="css-code"></pre>
-    </div>
+  <nav id="tabs" class="nav-tabs" role="tabs-navigation">
+    <a class="tab active" href="#grid-example">Grid Example</a>
+    <a class="tab" href="#css">See the CSS</a>
+  </nav>
+
+  <div class="tab-content" role="tabs">
+    <div class="tab-content-pane active" id="grid-example" role="tab"></div>
+    <div class="tab-content-pane" id="css" role="tab"><pre id="css-code"></pre></div>
   </div>
 </div>
+
+<footer class="measure">
+  Crafted with &lt;3 by <a href="http://johnotander.com" title="John Otander's website">John Otander</a>
+  (<a href="https://twitter.com/4lpine" title="John Otander on Twitter (@4lpine)">@4lpine</a>). <br>
+  &lt;/&gt; available on <a href="https://github.com/johnotander/rework-flex-grid" title="Rework flex grid source code">Github</a>.
+</footer>
 
 <script src="js/j.js"></script>
 </body>

@@ -54,4 +54,9 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest('js'));
 });
 
-gulp.task('default', ['rework', 'csslint', 'browserify']);
+gulp.task('watch', function() {
+  gulp.watch('css/src/*.css', ['rework', 'csslint']);
+  gulp.watch('js/src/*.js', ['browserify']);
+});
+
+gulp.task('default', ['rework', 'csslint', 'browserify', 'watch']);
