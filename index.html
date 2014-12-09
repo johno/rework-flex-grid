@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Rework Flex Grid</title>
+
+<meta name="author" content"John Otander">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dynamically generate and customize a lightweight flex grid system.">
+<link rel="stylesheet" href="css/c.css" type="text/css">
+</head>
+<body>
+
+<div class="measure" role="main">
+  <h1>Rework Flex Grid</h1>
+  <div role="form">
+    <label for="numColumns">Number of columns</label>
+    <input type="text" id="numColumns" placeholder="12" onchange="updateGrid();">
+
+    <label for="gridClassName">Grid class name</label>
+    <input type="text" id="gridClassName" placeholder="g" onchange="updateGrid();">
+
+    <label for="rowClassName">Row class name</label>
+    <input type="text" id="rowClassName" placeholder="r" onchange="updateGrid();">
+
+    <label for="colClassName">Column class name</label>
+    <input type="text" id="colClassName" placeholder="c" onchange="updateGrid();">
+  </div>
+  <div class="grid-tabs">
+    <div id="css">
+<pre id="css-code"></pre>
+    </div>
+  </div>
+</div>
+
+<script src="js/j.js"></script>
+</body>
+</html>

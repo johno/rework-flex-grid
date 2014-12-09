@@ -1,0 +1,260 @@
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+nav,
+main,
+section,
+article,
+aside,
+header,
+footer,
+div,
+form,
+fieldset,
+textarea,
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+.border-box {
+  box-sizing: border-box;
+}
+
+.flt--left {
+  float: left;
+}
+
+.flt--right {
+  float: right;
+}
+
+.flt--none {
+  float: none;
+}
+
+html {
+  font-size: 12px;
+}
+
+@media screen and (min-width: 32rem) and (max-width: 48rem) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 48rem) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  line-height: 1.85;
+}
+
+p,
+.p {
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  margin: 1.414rem 0 .5rem;
+  font-weight: inherit;
+  line-height: 1.42;
+}
+
+h1,
+.h1 {
+  margin-top: 0;
+  font-size: 3.998rem;
+}
+
+h2,
+.h2 {
+  font-size: 2.827rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.999rem;
+}
+
+h4,
+.h4 {
+  font-size: 1.414rem;
+}
+
+h5,
+.h5 {
+  font-size: 1.121rem;
+}
+
+h6,
+.h6 {
+  font-size: .88rem;
+}
+
+small,
+.small {
+  font-size: .707em;
+}
+
+.btn,
+.btn--link,
+.btn--blue,
+.btn--green,
+.btn--gray {
+  border-radius: 4px;
+  padding: 1rem/2 1rem;
+  border: 2px solid #ccc;
+  color: gray;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.btn--link {
+  border-color: transparent;
+  color: blue;
+}
+
+.btn-link:hover,
+.btn--link:focus,
+.btn--link:active {
+  background-color: transparent;
+  color: darken(blue, 15%);
+}
+
+.btn--blue {
+  border-color: darken(blue, 3%);
+  background-color: blue;
+  color: white;
+}
+
+.btn-blue:hover,
+.btn--blue:focus,
+.btn--blue:active {
+  color: white;
+  background-color: darken(blue, 10%);
+}
+
+.btn--green {
+  border-color: darken(green, 4%);
+  background-color: green;
+  color: white;
+}
+
+.btn--green:hover,
+.btn--green:focus,
+.btn--green:active {
+  color: white;
+  background-color: darken(green, 10%);
+}
+
+.btn--gray {
+  border-color: darken(gray, 5%);
+  background-color: gray;
+  color: white;
+}
+
+.btn--gray:hover,
+.btn--gray:focus,
+.btn--gray:active {
+  color: white;
+  background-color: darken(gray, 10%);
+}
+
+.btn--s {
+  font-size: 0.707em;
+  padding: 1rem/4 1rem/2;
+}
+
+.btn--l {
+  font-size: 1.2rem;
+  padding: 1rem 1rem*2;
+}
+
+.page {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.page-content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+input,
+textarea {
+  padding: .5rem;
+  margin-bottom: .5rem;
+  display: block;
+  width: 100%;
+  box-shadow: none;
+  border: thin solid #d8d8d8;
+}
+
+/* https://github.com/mrmrs/fluidity */
+
+img,
+canvas,
+iframe,
+video,
+svg,
+select,
+textarea {
+  max-width: 100%;
+}
+
+pre,
+code {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+pre {
+  padding: .5rem;
+  line-height: 1.25;
+  overflow-x: scroll;
+}
+
+.measure {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  padding: 3rem 0;
+}
+
+.hidden {
+  display: none;
+}
