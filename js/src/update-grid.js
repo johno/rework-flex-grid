@@ -28,10 +28,10 @@ module.exports = function updateGrid() {
   })).toString().trim();
 
   setCss(gridCss);
-  generateGridExample(gridCss, {
-    gridClass: gridClass,
-    rowClass: rowClass,
-    colClass: colClass,
-    numColumns: numColumns
-  });
+  // generateGridExample(gridCss, {
+  //   gridClass: gridClass,
+  //   rowClass: rowClass,
+  //   colClass: colClass,
+  //   numColumns: numColumns
+  // });
 };

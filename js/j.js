@@ -78,12 +78,12 @@ module.exports = function updateGrid() {
   })).toString().trim();
 
   setCss(gridCss);
-  generateGridExample(gridCss, {
-    gridClass: gridClass,
-    rowClass: rowClass,
-    colClass: colClass,
-    numColumns: numColumns
-  });
+  // generateGridExample(gridCss, {
+  //   gridClass: gridClass,
+  //   rowClass: rowClass,
+  //   colClass: colClass,
+  //   numColumns: numColumns
+  // });
 };
 
 },{"./generate-grid-example":2,"./set-css":3,"is-blank":13,"rework":26,"rework-flex-grid":16}],5:[function(require,module,exports){
