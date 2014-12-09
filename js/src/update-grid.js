@@ -3,6 +3,7 @@ var reworkFlexGrid = require('rework-flex-grid');
 var isBlank = require('is-blank');
 
 var setCss = require('./set-css');
+var generateGridExample = require('./generate-grid-example');
 
 module.exports = function updateGrid() {
   var numColumnsElem = document.getElementById('numColumns');
@@ -27,4 +28,10 @@ module.exports = function updateGrid() {
   })).toString().trim();
 
   setCss(gridCss);
+  generateGridExample(gridCss, {
+    gridClass: gridClass,
+    rowClass: rowClass,
+    colClass: colClass,
+    numColumns: numColumns
+  });
 };

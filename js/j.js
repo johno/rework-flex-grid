@@ -6,7 +6,37 @@ var updateGrid = require('./update-grid');
 }());
 
 
-},{"./update-grid":3}],2:[function(require,module,exports){
+},{"./update-grid":4}],2:[function(require,module,exports){
+module.exports = function generateGridExample(gridCss, gridOptions) {
+  var gridExampleElem = document.getElementById('grid-example');
+
+  var cssNode = document.createElement('style');
+  cssNode.appendChild(document.createTextNode(gridCss));
+  gridExampleElem.appendChild(cssNode);
+
+  var gridNode = document.createElement('div');
+  gridNode.className = gridOptions.gridClass;
+
+  gridExampleElem.appendChild(gridNode);
+
+  for(var i = 1; i < gridOptions.numColumns; i++) {
+    var rowNode = document.createElement('div');
+    rowNode.className = gridOptions.gridClass + '-' + gridOptions.rowClass;
+
+    rowNode.appendChild(createGridItemNode(i, gridOptions));
+    rowNode.appendChild(createGridItemNode(gridOptions.numColumns - i, gridOptions));
+    gridNode.appendChild(rowNode);
+  }
+};
+
+function createGridItemNode(currCol, gridOptions) {
+  var node = document.createElement('div');
+  node.className = gridOptions.gridClass + '-' + gridOptions.rowClass + '-' + gridOptions.colClass + '-' + currCol + '-' + gridOptions.numColumns;
+  node.appendChild(document.createTextNode(currCol + '-' + gridOptions.numColumns));
+  return node;
+}
+
+},{}],3:[function(require,module,exports){
 module.exports = function setCss(cssText) {
   var cssCodeElem = document.getElementById('css-code');
 
@@ -17,12 +47,13 @@ module.exports = function setCss(cssText) {
   cssCodeElem.appendChild(document.createTextNode(cssText));
 };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var rework = require('rework')
 var reworkFlexGrid = require('rework-flex-grid');
 var isBlank = require('is-blank');
 
 var setCss = require('./set-css');
+var generateGridExample = require('./generate-grid-example');
 
 module.exports = function updateGrid() {
   var numColumnsElem = document.getElementById('numColumns');
@@ -47,11 +78,17 @@ module.exports = function updateGrid() {
   })).toString().trim();
 
   setCss(gridCss);
+  generateGridExample(gridCss, {
+    gridClass: gridClass,
+    rowClass: rowClass,
+    colClass: colClass,
+    numColumns: numColumns
+  });
 };
 
-},{"./set-css":2,"is-blank":11,"rework":26,"rework-flex-grid":14}],4:[function(require,module,exports){
+},{"./generate-grid-example":2,"./set-css":3,"is-blank":13,"rework":26,"rework-flex-grid":16}],5:[function(require,module,exports){
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -1105,7 +1142,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":6,"ieee754":7,"is-array":8}],6:[function(require,module,exports){
+},{"base64-js":7,"ieee754":8,"is-array":9}],7:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1227,7 +1264,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1313,7 +1350,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 /**
  * isArray
@@ -1348,7 +1385,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1576,7 +1613,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":10}],10:[function(require,module,exports){
+},{"_process":11}],11:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1664,7 +1701,18 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
+module.exports = function extendOptions(defaultOptions, options) {
+  Object.keys(defaultOptions).forEach(function(key) {
+    if(!(key in options)) {
+      options[key] = defaultOptions[key];
+    }
+  });
+
+  return options;
+}
+
+},{}],13:[function(require,module,exports){
 var isEmpty = require('is-empty');
 var isWhitespace = require('is-whitespace');
 
@@ -1676,7 +1724,7 @@ module.exports = function isBlank(object) {
   }
 };
 
-},{"is-empty":12,"is-whitespace":13}],12:[function(require,module,exports){
+},{"is-empty":14,"is-whitespace":15}],14:[function(require,module,exports){
 
 /**
  * Expose `isEmpty`.
@@ -1706,7 +1754,7 @@ function isEmpty (val) {
   for (var key in val) if (has.call(val, key)) return false;
   return true;
 }
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
  * is-whitespace <https://github.com/jonschlinkert/is-whitespace>
  *
@@ -1725,7 +1773,7 @@ module.exports = function isWhitespace(value) {
   return false;
 };
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var toPercentage = require('to-percentage');
@@ -1772,7 +1820,7 @@ module.exports = function flex(options) {
 
     css.rules = css.rules.concat({
       type: 'rule',
-      selectors: [getPrefixedSelector(classNames.grid, classNames.row)],
+      selectors: [getPrefixedSelector('g', 'r')],
       declarations: rowDeclarations()
     });
 
@@ -1809,7 +1857,7 @@ module.exports = function flex(options) {
   };
 };
 
-},{"./lib/create-col-rule":15,"./lib/defaults/class-names":16,"./lib/defaults/col-declarations":17,"./lib/defaults/grid-declarations":18,"./lib/defaults/grid-units":19,"./lib/defaults/media-queries":20,"./lib/defaults/row-declarations":21,"./lib/get-col-selector":22,"./lib/utils/get-prefixed-selector":23,"extend-options":24,"to-percentage":25}],15:[function(require,module,exports){
+},{"./lib/create-col-rule":17,"./lib/defaults/class-names":18,"./lib/defaults/col-declarations":19,"./lib/defaults/grid-declarations":20,"./lib/defaults/grid-units":21,"./lib/defaults/media-queries":22,"./lib/defaults/row-declarations":23,"./lib/get-col-selector":24,"./lib/utils/get-prefixed-selector":25,"extend-options":12,"to-percentage":50}],17:[function(require,module,exports){
 var getColSelector = require('./get-col-selector');
 var toPercentage = require('to-percentage');
 
@@ -1831,7 +1879,7 @@ module.exports = function createColRule(currCol, numCols, classNames, modifier) 
   return colRule;
 };
 
-},{"./get-col-selector":22,"to-percentage":25}],16:[function(require,module,exports){
+},{"./get-col-selector":24,"to-percentage":50}],18:[function(require,module,exports){
 module.exports = function classNames() {
   return {
     gridClass: 'g',
@@ -1840,7 +1888,7 @@ module.exports = function classNames() {
   };
 }
 
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports = function colDeclarations() {
   return [{
     type: 'declaration',
@@ -1857,7 +1905,7 @@ module.exports = function colDeclarations() {
   }];
 }
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 module.exports = function gridDeclarations() {
   return [{
     type: 'declaration',
@@ -1870,12 +1918,12 @@ module.exports = function gridDeclarations() {
   }];
 }
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = function gridUnits() {
   return 'rem';
 }
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 module.exports = function mediaQueries() {
   return {
     xs: '',
@@ -1886,7 +1934,7 @@ module.exports = function mediaQueries() {
   };
 }
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = function rowDeclarations() {
   return [{
     type: 'declaration',
@@ -1911,7 +1959,7 @@ module.exports = function rowDeclarations() {
   }];
 }
 
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var getPrefixedSelector = require('./utils/get-prefixed-selector')
 
 module.exports = function getColSelector(currCol, numCols, classNames, modifier) {
@@ -1938,30 +1986,11 @@ module.exports = function getColSelector(currCol, numCols, classNames, modifier)
     classModifiers);
 };
 
-},{"./utils/get-prefixed-selector":23}],23:[function(require,module,exports){
+},{"./utils/get-prefixed-selector":25}],25:[function(require,module,exports){
 module.exports = function getPrefixedSelector() {
   var args = [].slice.call(arguments);
   return '.' + args.join('-');
 };
-
-},{}],24:[function(require,module,exports){
-module.exports = function extendOptions(defaultOptions, options) {
-  Object.keys(defaultOptions).forEach(function(key) {
-    if(!(key in options)) {
-      options[key] = defaultOptions[key];
-    }
-  });
-
-  return options;
-}
-
-},{}],25:[function(require,module,exports){
-'use strict';
-
-module.exports = function toPercentage(value, numDecimals) {
-  value *= 100;
-  return value.toFixed(value % 1 === 0 ? 0 : numDecimals) + '%';
-}
 
 },{}],26:[function(require,module,exports){
 
@@ -2190,7 +2219,7 @@ exports.__defineGetter__('mapFileCommentRegex', function () {
 });
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":5,"fs":4,"path":9}],28:[function(require,module,exports){
+},{"buffer":6,"fs":5,"path":10}],28:[function(require,module,exports){
 exports.parse = require('./lib/parse');
 exports.stringify = require('./lib/stringify');
 
@@ -3478,7 +3507,7 @@ exports.comment = function(node) {
     return this._comment(node);
 };
 
-},{"fs":4,"path":9,"source-map":39,"source-map-resolve":38,"urix":49}],35:[function(require,module,exports){
+},{"fs":5,"path":10,"source-map":39,"source-map-resolve":38,"urix":49}],35:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -6138,7 +6167,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/rework/node_modules/css/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":10,"path":9}],49:[function(require,module,exports){
+},{"_process":11,"path":10}],49:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -6157,4 +6186,12 @@ function urix(aPath) {
 
 module.exports = urix
 
-},{"path":9}]},{},[1]);
+},{"path":10}],50:[function(require,module,exports){
+'use strict';
+
+module.exports = function toPercentage(value, numDecimals) {
+  value *= 100;
+  return value.toFixed(value % 1 === 0 ? 0 : numDecimals) + '%';
+}
+
+},{}]},{},[1]);
