@@ -88,15 +88,16 @@ _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/po
 
 ## TODO:
 
-- [ ] Create a mini app to allow people to generate grids in their browser.
+- [X] Create a mini app to allow people to generate grids in their browser.
 - [ ] Offset configuration.
 - [X] Media queries.
 - [X] Media query configuration.
+- [ ] Make default grid classes responsive 12 > 6 > 1
 
 ## Acknowledgements
 
-Inspired by [Yahoo!'s Rework Pure Grids](https://github.com/yahoo/rework-pure-grids).
-Adapted some flex grid code from [Kristofer Joseph](https://github.com/kristoferjoseph/flexboxgrid).
+* Inspired by [Yahoo!'s Rework Pure Grids](https://github.com/yahoo/rework-pure-grids).
+* Adapted some flex grid code from [Kristofer Joseph](https://github.com/kristoferjoseph/flexboxgrid).
 
 ## License
 
