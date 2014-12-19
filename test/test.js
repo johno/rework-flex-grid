@@ -8,12 +8,13 @@ function fixture(name) {
 }
 
 describe('rework-flex', function() {
+
   it('should create the default grid correctly', function() {
     var output = rework(fixture('source.css')).use(flexGrid()).toString().trim();
     var expected = fixture('default.css');
 
     fs.writeFileSync('test/fixtures/default.output.css', output);
 
-    assert.equal(output, output); // expected);
+    assert.equal(output, expected);
   });
 });

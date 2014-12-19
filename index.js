@@ -36,30 +36,40 @@ module.exports = function flex(options) {
       lg: '64rem'
     }, options.mediaQueries || {});
 
+    // Grid declarations.
     css.rules = css.rules.concat({
       type: 'rule',
       selectors: ['.' + classNames.grid],
       declarations: gridDeclarations()
     });
 
+    // Row declarations.
     css.rules = css.rules.concat({
       type: 'rule',
       selectors: [getPrefixedSelector(classNames.grid, classNames.row)],
       declarations: rowDeclarations()
     });
 
-    var colSelectors = []
+    var colSelectors = [];
+    // Iterate over all possible columns.
     for(var i = 1; i <= options.numColumns; i++) {
       colSelectors.push(getColSelector(i, options.numColumns, classNames));
       css.rules = css.rules.concat(createColRule(i, options.numColumns, classNames));
+
+      // Add the media query modifiers to the selectors list.
+      Object.keys(mediaQueries).forEach(function(mediaQuery) {
+        colSelectors.push(getColSelector(i, options.numColumns, classNames, mediaQuery));
+      });
     }
 
+    // Add all base column declarations.
     css.rules = css.rules.concat({
       type: 'rule',
       selectors: [colSelectors],
-      declarations: rowDeclarations()
+      declarations: colDeclarations()
     });
 
+    // Add media queries with modifiers.
     Object.keys(mediaQueries).forEach(function(key) {
       var mediaQueryRules = [];
 
@@ -69,7 +79,7 @@ module.exports = function flex(options) {
                               i,
                               options.numColumns,
                               classNames,
-                              '-' + key));
+                              key));
       }
 
       css.rules.push({
