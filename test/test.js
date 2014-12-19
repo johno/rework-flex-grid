@@ -17,4 +17,18 @@ describe('rework-flex', function() {
 
     assert.equal(output, expected);
   });
+
+  it('should correctly handle custom class names', function() {
+    var output = rework(fixture('source.css')).use(flexGrid({
+      classNames: {
+        grid: 'grid',
+        row: 'row'
+      }
+    })).toString().trim();
+    var expected = fixture('custom-class-names.css');
+
+    fs.writeFileSync('test/fixtures/custom-class-names.output.css', output);
+
+    assert.equal(output, expected);
+  });
 });
