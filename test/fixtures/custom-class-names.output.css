@@ -81,6 +81,11 @@
   box-sizing: border-box;
 }
 
+.grid-row-c-1-12--sm,.grid-row-c-1-12--md,.grid-row-c-1-12--lg,.grid-row-c-2-12--sm,.grid-row-c-2-12--md,.grid-row-c-2-12--lg,.grid-row-c-3-12--sm,.grid-row-c-3-12--md,.grid-row-c-3-12--lg,.grid-row-c-4-12--sm,.grid-row-c-4-12--md,.grid-row-c-4-12--lg,.grid-row-c-5-12--sm,.grid-row-c-5-12--md,.grid-row-c-5-12--lg,.grid-row-c-6-12--sm,.grid-row-c-6-12--md,.grid-row-c-6-12--lg,.grid-row-c-7-12--sm,.grid-row-c-7-12--md,.grid-row-c-7-12--lg,.grid-row-c-8-12--sm,.grid-row-c-8-12--md,.grid-row-c-8-12--lg,.grid-row-c-9-12--sm,.grid-row-c-9-12--md,.grid-row-c-9-12--lg,.grid-row-c-10-12--sm,.grid-row-c-10-12--md,.grid-row-c-10-12--lg,.grid-row-c-11-12--sm,.grid-row-c-11-12--md,.grid-row-c-11-12--lg,.grid-row-c-12--sm,.grid-row-c-12--md,.grid-row-c-12--lg {
+  max-width: 100%;
+  flex-basis: 100%;
+}
+
 @media screen and (min-width: 32rem) {
   .grid-row-c-1-12--sm {
     max-width: 8.3333333333%;

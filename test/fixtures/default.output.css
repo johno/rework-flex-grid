@@ -81,6 +81,11 @@
   box-sizing: border-box;
 }
 
+.g-r-c-1-12--sm,.g-r-c-1-12--md,.g-r-c-1-12--lg,.g-r-c-2-12--sm,.g-r-c-2-12--md,.g-r-c-2-12--lg,.g-r-c-3-12--sm,.g-r-c-3-12--md,.g-r-c-3-12--lg,.g-r-c-4-12--sm,.g-r-c-4-12--md,.g-r-c-4-12--lg,.g-r-c-5-12--sm,.g-r-c-5-12--md,.g-r-c-5-12--lg,.g-r-c-6-12--sm,.g-r-c-6-12--md,.g-r-c-6-12--lg,.g-r-c-7-12--sm,.g-r-c-7-12--md,.g-r-c-7-12--lg,.g-r-c-8-12--sm,.g-r-c-8-12--md,.g-r-c-8-12--lg,.g-r-c-9-12--sm,.g-r-c-9-12--md,.g-r-c-9-12--lg,.g-r-c-10-12--sm,.g-r-c-10-12--md,.g-r-c-10-12--lg,.g-r-c-11-12--sm,.g-r-c-11-12--md,.g-r-c-11-12--lg,.g-r-c-12--sm,.g-r-c-12--md,.g-r-c-12--lg {
+  max-width: 100%;
+  flex-basis: 100%;
+}
+
 @media screen and (min-width: 32rem) {
   .g-r-c-1-12--sm {
     max-width: 8.3333333333%;

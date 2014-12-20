@@ -6,6 +6,7 @@ var extendOptions = require('extend-options');
 var getColSelector = require('./lib/get-col-selector');
 var createColRule = require('./lib/create-col-rule');
 
+var mobileFirstColDeclarations = require('./lib/defaults/mobile-first-col-declarations');
 var gridDeclarations = require('./lib/defaults/grid-declarations');
 var rowDeclarations = require('./lib/defaults/row-declarations');
 var colDeclarations = require('./lib/defaults/col-declarations');
@@ -51,6 +52,7 @@ module.exports = function flex(options) {
     });
 
     var colSelectors = [];
+    var mediaQuerySelectors = [];
     // Iterate over all possible columns.
     for(var i = 1; i <= options.numColumns; i++) {
       colSelectors.push(getColSelector(i, options.numColumns, classNames));
@@ -58,7 +60,9 @@ module.exports = function flex(options) {
 
       // Add the media query modifiers to the selectors list.
       Object.keys(mediaQueries).forEach(function(mediaQuery) {
-        colSelectors.push(getColSelector(i, options.numColumns, classNames, mediaQuery));
+        var mediaQuery = getColSelector(i, options.numColumns, classNames, mediaQuery);
+        mediaQuerySelectors.push(mediaQuery);
+        colSelectors.push(mediaQuery);
       });
     }
 
@@ -67,6 +71,13 @@ module.exports = function flex(options) {
       type: 'rule',
       selectors: [colSelectors],
       declarations: colDeclarations()
+    });
+
+    // Add mobile first default declarations.
+    css.rules = css.rules.concat({
+      type: 'rule',
+      selectors: [mediaQuerySelectors],
+      declarations: mobileFirstColDeclarations()
     });
 
     // Add media queries with modifiers.
