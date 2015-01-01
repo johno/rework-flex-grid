@@ -1,7 +1,5 @@
 # Rework Flex Grid
 
-__Currently under development (it's nearing completion).__
-
 [![Build Status](https://travis-ci.org/johnotander/rework-flex-grid.svg?branch=master)](https://travis-ci.org/johnotander/rework-flex-grid)
 
 Rework CSS plugin for generating custom, lightweight [flex](http://caniuse.com/#search=flex) grids.
