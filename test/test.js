@@ -31,4 +31,15 @@ describe('rework-flex', function() {
 
     assert.equal(output, expected);
   });
+
+  it('should generate offsets when added as an option', function() {
+    var output = rework(fixture('source.css')).use(flexGrid({
+      offsets: true
+    })).toString().trim();
+    var expected = fixture('offsets.css');
+
+    fs.writeFileSync('test/fixtures/offsets.output.css', output);
+
+    assert.equal(output, expected);
+  });
 });
