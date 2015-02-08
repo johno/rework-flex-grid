@@ -89,6 +89,13 @@ var out = rework(css).use(flexGrid(flexGridOptions)).toString();
 
 _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/postcss/autoprefixer).
 
+## Options
+
+* `numColumns`, _Number_ for the number of columns. Defaults to `12`.
+* `classNames`, _Object_ with `grid`, `row`, and `col`. Defaults to `g`, `r`, and `c` respectively.
+* `mediaQueries`, _Object_ with `sm`, `md`, and `lg`. Defaults to `32rem`, `48rem`, and `64rem` respectively.
+* `offsets`, _Boolean_ to determine whether to include offsets or not. Defaults to `false`.
+
 ## TODO:
 
 - [X] Create a mini app to allow people to generate grids in their browser.
