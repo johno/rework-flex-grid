@@ -38,7 +38,11 @@ resulting in CSS similar to:
   /* ... */
 }
 
-.gridClass-rowClass-columnClass {
+.gridClass-rowClass-columnClass-1-12 {
+  /* ... */
+}
+
+.gridClass-rowClass-columnClass-offset-1 {
   /* ... */
 }
 
@@ -75,7 +79,8 @@ var flexGridOptions = {
     sm: '32rem',
     md: '48rem',
     lg: '64rem'
-  }
+  },
+  offsets: true
 };
 
 var css = fs.readFileSync('css/my-file.css', 'utf8').toString();
@@ -84,10 +89,17 @@ var out = rework(css).use(flexGrid(flexGridOptions)).toString();
 
 _Note:_ This plugin produces CSS that should be [prefixed](https://github.com/postcss/autoprefixer).
 
+## Options
+
+* `numColumns`, _Number_ for the number of columns. Defaults to `12`.
+* `classNames`, _Object_ with `grid`, `row`, and `col`. Defaults to `g`, `r`, and `c` respectively.
+* `mediaQueries`, _Object_ with `sm`, `md`, and `lg`. Defaults to `32rem`, `48rem`, and `64rem` respectively.
+* `offsets`, _Boolean_ to determine whether to include offsets or not. Defaults to `false`.
+
 ## TODO:
 
 - [X] Create a mini app to allow people to generate grids in their browser.
-- [ ] Offset configuration.
+- [X] Offset configuration.
 - [X] Media queries.
 - [X] Media query configuration.
 - [ ] Make default grid classes responsive 12 > 6 > 1

@@ -3,6 +3,7 @@
 var toPercentage = require('to-percentage');
 var extendOptions = require('extend-options');
 
+var createColOffsetRule = require('./lib/create-col-offset-rule');
 var getColSelector = require('./lib/get-col-selector');
 var createColRule = require('./lib/create-col-rule');
 
@@ -57,6 +58,10 @@ module.exports = function flex(options) {
     for(var i = 1; i <= options.numColumns; i++) {
       colSelectors.push(getColSelector(i, options.numColumns, classNames));
       css.rules = css.rules.concat(createColRule(i, options.numColumns, classNames));
+
+      if (options.offsets && i !== options.numColumns) {
+        css.rules = css.rules.concat(createColOffsetRule(i, options.numColumns, classNames));
+      }
 
       // Add the media query modifiers to the selectors list.
       Object.keys(mediaQueries).forEach(function(mediaQuery) {
